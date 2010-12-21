@@ -1,0 +1,191 @@
+modifier: None
+created: 
+modified: 20100127161845
+type: None
+tags: 
+
+|''Name''|BookmarkletTheme|
+|''Description''|A minimal theme designed to be used with the bookmarklet plugin|
+|''PageTemplate''|##PageTemplate|
+|''StyleSheet''|##StyleSheet|
+
+!PageTemplate
+<!--{{{-->
+<div class='topMenu'>
+    <ul class='topMenuList'>
+    <li class='topMenuItem'><a class='button'>main menu</a><div refresh='content' tiddler='MainMenu'></div></li>
+    <li class='topMenuItem'><span macro='newTiddler'></span></li>
+    <li class='topMenuItem'><a class='button'>timeline</a><div id='sidebar'><div id='sidebarTabs' refresh='content' force='true' tiddler='TabTimeline'></div></div></li>
+    <li class='topMenuItem'><a class='button'>a-z</a><div id='sidebar'><div id='sidebarTabs' refresh='content' force='true' tiddler='TabAll'></div></div></li>
+    <li class='topMenuItem'><span macro='saveChanges'></span></li>
+    </ul>
+</div>
+<div class='displayHolder'>
+    <div id='displayArea'>
+        <div id='messageArea'></div>
+        <div id='tiddlerDisplay'></div>
+    </div>
+</div>
+<div class='footerMenu'>
+    <div class='footerHolder'>
+        <div id='searchMenuItem' macro='search'></div>
+    </div>
+</div>
+<!--}}}-->
+
+!StyleSheet
+/*{{{*/
+#displayArea {
+    margin: 0px 0px 0px 0px;
+    display: block;
+    max-width: 95%;
+    overflow: hidden;
+}
+
+.displayHolder {
+    position: fixed !important;
+    position: absolute;
+    overflow-y: auto;
+    top: 2.5em;
+    bottom: 3em;
+    z-index: 1;
+    max-width: 100%;
+}
+
+#mainMenu {
+    padding: 0px;
+    margin-bottom: 2px;
+    text-align: left;
+    width: auto;
+}
+
+#sidebarTabs, .tabContent {
+    background-color: #B0C2ED;
+    left: 0;
+}
+
+#sidebar {
+    left: -60px;
+}
+
+#sidebar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+#sidebar ul li {
+    list-style: none outside none;
+}
+
+#sidebar ul li.listLink {
+    margin-left: 0.75em;
+}
+
+.topMenu {
+    display: block;
+    height: 2em;
+    position: fixed !important;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #6D94ED;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    padding-left: 2px;
+    padding-right: 2px;
+    border-bottom: 1px solid black;
+    z-index: 10;
+}
+
+body {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+#contentWrapper {
+    height: 100%;
+    width: 100%;
+}
+
+#backstageButton, #backstageArea {
+    display: none !important;
+}
+
+.topMenu ul.topMenuList {
+    list-style-type: none;
+    padding-left: 0px;
+    width: 100%;
+    display: block;
+    position: absolute;
+    margin-top: 0;
+}
+
+.topMenu ul.topMenuList li.topMenuItem {
+
+    position: relative;
+    float: left;
+    padding: 5px;
+    display: inline-block;
+}
+
+.topMenu ul.topMenuList li.topMenuItem > div {
+    visibility: hidden;
+    position: absolute;
+    padding: 10px 5px 5px 5px;
+    border: 1px solid black !important;
+}
+
+.topMenu .button {
+    cursor: pointer;
+    border: 0;
+    padding-left: 2px;
+    padding-right: 2px;
+}
+
+.topMenu .button:hover {
+    background-color: #FFCC65;
+    border-color: #FFAA00;
+}
+
+.topMenu ul.topMenuList li.topMenuItem:hover {
+    background-color: #FFCC65;
+    border-color: #FFAA00;
+}
+
+.topMenu ul.topMenuList li.topMenuItem:hover div {
+    visibility: visible;
+}
+
+.topMenu ul.topMenuList li.topMenuItem div {
+    background-color: #B0C2ED !important;
+}
+
+.footerMenu {
+    background-color: #6D94ED;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    border-top: 1px solid black;
+    height: 2em;
+    position: fixed !important;
+    position: absolute;
+    bottom: 0;
+    padding-left: 2px;
+    padding-right: 2px;
+    width: 100%;
+    z-index: 10;
+}
+
+.footerHolder {
+    width: 98%;
+}
+
+#searchMenuItem {
+    float: right;
+    margin-right: 2px;
+}
+/*}}}*/

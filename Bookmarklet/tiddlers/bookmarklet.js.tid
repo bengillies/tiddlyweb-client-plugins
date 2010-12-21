@@ -1,0 +1,117 @@
+modifier: None
+created: 
+modified: 20100128132014
+type: text/javascript
+tags: 
+
+
+(function(obj) {    
+    //create an iframe and load tiddlywiki into it
+    obj.openTiddlyWiki = function(urlBase, path, tiddler, siteTitle) {
+        var css = document.createElement('link');
+        css.type = 'text/css';
+        css.rel = 'stylesheet';
+        css.href = urlBase + path + '/tiddlers/bookmarklet.css';
+        document.body.appendChild(css);
+    
+        var container = document.createElement('div');
+        container.className = 'TiddlyWikiImportContainer';
+        document.body.appendChild(container);
+    
+        var closeButton = document.createElement('a');
+        closeButton.className = 'TiddlyWikiImportCloseButton';
+        closeButton.href = 'javascript:;';
+        closeButton.innerHTML = 'X';
+        closeButton.onclick = function() {
+            //hide, don't remove
+            document.body.removeChild(css);
+            document.body.removeChild(container);
+        };
+        container.appendChild(closeButton);
+    
+        var containerTitle = document.createElement('div');
+        containerTitle.className = 'TiddlyWikiContainerTitle';
+        containerTitle.innerHTML = siteTitle;
+        container.appendChild(containerTitle);
+    
+        var tiddlerLink = (tiddler) ? '#[[' + tiddler + ']]' : '';
+        var iframe = document.createElement('iframe');
+        iframe.className = 'TiddlyWikiImportIFrame';
+        if (window.postMessage) {
+            iframeLink = urlBase + path + '/tiddlers.wiki' + tiddlerLink;
+            iframe.src = iframeLink;
+            container.appendChild(iframe);
+        
+            //wait until the site has loaded and then send some messages
+            iframeOnLoadHandler = function() {
+                sendSiteInfo(iframe, urlBase);
+            };
+            iframe.onload = iframeOnLoadHandler;
+            
+            //IE onLoad handler:
+            completeReadyStateChanges = 0;
+            iframe.onreadystatechange = function() {
+              if (++(completeReadyStateChanges) == 3) {
+                  iFrameOnLoadHandler();
+              }
+            }
+        } else {
+            //no postMessage #probably ie6
+            var iframeLink = urlBase + path + '/tiddlers.wiki?';
+            var parentUrl = window.location.href;
+            var queryString = 'bookmarkletParentURL=' + encodeURIComponent(parentUrl);
+            queryString += '&bookmarkletParentTitle=' + encodeURIComponent(document.title);
+            queryString += '&bookmarkletParentDesc=' + encodeURIComponent(getSiteText());
+
+            iframeLink += queryString + tiddlerLink;
+            iframe.src = iframeLink;
+            container.appendChild(iframe);
+        }
+    };
+    
+    function sendSiteInfo(iframe, targetLink) {
+        var siteURL = 'url:' + window.location.href;
+        sendMessage(siteURL, targetLink, iframe.contentWindow);
+
+        var siteTitle = 'title:' + document.title;
+        sendMessage(siteTitle, targetLink, iframe.contentWindow);
+
+        siteDesc = 'desc:' + getSiteText();
+        sendMessage(siteDesc, targetLink, iframe.contentWindow);
+    }
+
+    function getSiteText() {
+        var text = '';
+        if (window.getSelection) {
+            text = window.getSelection().toString();
+        } else if (document.getSelection) {
+            text = document.getSelection();
+        } else if (document.selection) {
+            text = document.selection.createRange().text;
+        } else {
+            text = '';
+        }
+
+        if (!text) {
+            var metaTags = document.getElementsByTagName('meta');
+            var siteDescription = '';
+            for (var i=0; i < metaTags.length; i++) {
+                var tag = metaTags[i];
+                if ((tag.className) && (tag.className.toLowerCase() = 'description')) {
+                    text = tag.innerText;
+                    break;
+                }
+            }
+        }
+
+        if (!text) {
+            text = document.title;
+        }
+
+        return text;
+    }
+
+    function sendMessage(message, target, hWnd) {
+        hWnd.postMessage(message, target);
+    };
+})(window);

@@ -1,0 +1,62 @@
+modifier: None
+created: 
+modified: 20100127161525
+type: text/css
+tags: bookmarklet
+
+.TiddlyWikiImportContainer {
+    position: absolute;
+    position: fixed !important;
+    right: 0 !important;
+    top: 0 !important;
+    height: 100% !important;
+    width: 350px !important;
+    background-color: #1240AB !important;
+   /* border-right: 1px solid black;*/
+    border-left: 1px solid black !important;
+    padding-left: 2px !important;
+    padding-top: 2px !important;
+    z-index: 9999999 !important;
+}
+
+.TiddlyWikiImportCloseButton {
+    display: block !important;
+    float: left !important;
+    color: black !important;
+    border: 0 !important;
+    text-decoration: none !important;
+    padding: 2px !important;
+    margin-bottom: 2px !important;
+    max-width: 12px !important;
+    font-family: arial, helvetica !important;
+    font-size: 12px !important;
+}
+
+.TiddlyWikiImportCloseButton:hover {
+    background: none repeat scroll 0 0 #FFCC65 !important;
+    border-color: #FFAA00;
+    color: #001144 !important;
+}
+
+.TiddlyWikiImportIFrame {
+    height: 95% !important;
+    width: 100% !important;
+    border: 1px solid black !important;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.TiddlyWikiContainerTitle {
+    display: block !important;
+    float: left !important;
+    font-family: arial, helvetica !important;
+    font-size: 12px !important;
+    margin-left: 5px !important;
+    padding: 2px !important;
+    margin-bottom: 2px !important;
+    font-weight: bold !important;
+    max-width: 325px !important;
+    max-height: 12px !important;
+    overflow: hidden !important;
+    color: white;
+}
