@@ -58,7 +58,7 @@ config.macros.fileImport = {
 		var iframe = $('<iframe name="' + iframeName + '" '
 			+ 'style="display: none" />').appendTo(uploadWrapper);
 		var onSubmit = function(ev) {
-			var uploadType = $('select', wizard.formElem).val();
+			var uploadType = $('select[name=uploadtype]', wizard.formElem).val();
 			if (uploadType == "file") {
 				// set an onload ready to hijack the form
 				me.setOnLoad(uploadWrapper, wizard, iframe[0]);
@@ -117,7 +117,7 @@ config.macros.fileImport = {
 			}
 		};
 		$(place).append('<span>%0</span>'.format(me.step1TypeChooser)).
-			append($('<select><option value="file" selected="selected">file'
+			append($('<select name="uploadtype"><option value="file" selected="selected">file'
 				+ '<option value="uri">url</select>').change(onSelectChange)).
 			append('<div class="importFrom">%0<input type="file" name="file" />'.
 					format(me.step1FileText)
