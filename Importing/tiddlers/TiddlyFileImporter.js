@@ -1,6 +1,6 @@
 /***
 |''Name''|TiddlyFileImporter|
-|''Version''|0.3.4|
+|''Version''|0.3.5|
 |''Author''|Ben Gillies|
 |''Type''|plugin|
 |''Description''|Upload a TiddlyWiki file to TiddlyWeb, and import the tiddlers.|
@@ -67,8 +67,8 @@ config.macros.fileImport = {
 			} else {
 				var csrf_token = config.extensions.tiddlyspace.getCSRFToken();
 				$.ajax({
-					url: "%0/reflector?csrf_token=%1".format([
-						config.defaultCustomFields["server.host"], csrf_token]),
+					url: "%0/reflector?csrf_token=%1".format(
+						config.defaultCustomFields["server.host", csrf_token]),
 					type: "POST",
 					dataType: "text",
 					data: {
@@ -110,17 +110,17 @@ config.macros.fileImport = {
 			var changeTo = $(this).val();
 			if (changeTo == "file") {
 				$(".importFrom").html('%0 <input type="file" name="file" />'.
-					format([me.step1FileText]));
+					format(me.step1FileText));
 			} else {
 				$(".importFrom").html('%0 <input type="text" name="uri" />'.
-					format([me.step1URLText]));
+					format(me.step1URLText));
 			}
 		};
-		$(place).append('<span>%0</span>'.format([me.step1TypeChooser])).
+		$(place).append('<span>%0</span>'.format(me.step1TypeChooser)).
 			append($('<select><option value="file" selected="selected">file'
 				+ '<option value="uri">url</select>').change(onSelectChange)).
 			append('<div class="importFrom">%0<input type="file" name="file" />'.
-					format([me.step1FileText])
+					format(me.step1FileText)
 				+ '</div>');
 	},
 
