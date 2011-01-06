@@ -68,7 +68,7 @@ config.macros.fileImport = {
 				var csrf_token = config.extensions.tiddlyspace.getCSRFToken();
 				$.ajax({
 					url: "%0/reflector?csrf_token=%1".format(
-						config.defaultCustomFields["server.host", csrf_token]),
+						config.defaultCustomFields["server.host"], csrf_token),
 					type: "POST",
 					dataType: "text",
 					data: {
@@ -102,7 +102,7 @@ config.macros.fileImport = {
 		var form = wizard.formElem;
 		var me = config.macros.fileImport;
 		form.action = me.reflectorURI.format(
-			[config.extensions.tiddlyspace.getCSRFToken()]);
+			config.extensions.tiddlyspace.getCSRFToken());
 		form.enctype = 'multipart/form-data';
 		form.method = 'POST';
 		form.target = iframeName;
