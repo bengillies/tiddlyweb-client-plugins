@@ -104,6 +104,7 @@ config.macros.fileImport = {
 		form.action = me.reflectorURI.format(
 			config.extensions.tiddlyspace.getCSRFToken());
 		form.enctype = 'multipart/form-data';
+		form.encoding = 'multipart/form-data';
 		form.method = 'POST';
 		form.target = iframeName;
 		onSelectChange = function(e) {
