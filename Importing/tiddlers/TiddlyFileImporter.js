@@ -28,10 +28,10 @@ config.macros.fileImport = {
 	step1PostText: 'In the next screen you will select the tiddlers to import.',
 	step1Title: 'Step 1: Pick a TiddlyWiki to import',
 	step1TypeChooser: 'Import From:',
-	step3Html: '<input type="hidden" name="markList" />'
-		+ '<input type="hidden" checked="true" name="chkSync" />'
-		+ '<input type="hidden" name="chkSave" />'
-		+ '<input type="hidden" name="txtSaveTiddler" />',
+	step3Html: ['<input type="hidden" name="markList" />',
+		'<input type="hidden" checked="true" name="chkSync" />',
+		'<input type="hidden" name="chkSave" />',
+		'<input type="hidden" name="txtSaveTiddler" />'].join(),
 
 	handler: function(place, macroName, params, wikifier, paramString) {
 		var wizard = new Wizard();
@@ -41,8 +41,8 @@ config.macros.fileImport = {
 
 	restart: function(wizard) {
 		var me = config.macros.fileImport;
-		wizard.addStep(me.step1Title, '<input type="hidden" '
-			+ 'name="markList" />');
+		wizard.addStep(me.step1Title, ['<input type="hidden" ',
+			'name="markList" />'].join(""));
 		var markList = wizard.getElement('markList');
 		var uploadWrapper = document.createElement('div');
 		markList.parentNode.insertBefore(uploadWrapper, markList);
@@ -55,8 +55,8 @@ config.macros.fileImport = {
 		wizard.setValue('adaptor', new config.adaptors.file());
 		wizard.setValue('host', config.defaultCustomFields['server.host']);
 		wizard.setValue('context', {});
-		var iframe = $('<iframe name="' + iframeName + '" '
-			+ 'style="display: none" />').appendTo(uploadWrapper);
+		var iframe = $(['<iframe name="' + iframeName + '" ',
+			'style="display: none" />'].join("")).appendTo(uploadWrapper);
 		var onSubmit = function(ev) {
 			var uploadType = $('select[name=uploadtype]', wizard.formElem).val();
 			if (uploadType == "file") {
@@ -79,8 +79,8 @@ config.macros.fileImport = {
 						me.importTiddlers(uploadWrapper, wizard);
 					},
 					error: function(xhr, txtStatus, error) {
-						displayMessage("There was an error fetching the "
-							+ 'url: ' + txtStatus);
+						displayMessage(["There was an error fetching the ",
+							'url: ', txtStatus].join(""));
 						me.restart(wizard);
 					}
 				});
@@ -117,11 +117,10 @@ config.macros.fileImport = {
 			}
 		};
 		$(place).append('<span>%0</span>'.format(me.step1TypeChooser)).
-			append($('<select name="uploadtype"><option value="file" selected="selected">file'
-				+ '<option value="uri">url</select>').change(onSelectChange)).
-			append('<div class="importFrom">%0<input type="file" name="file" />'.
-					format(me.step1FileText)
-				+ '</div>');
+			append($(['<select name="uploadtype"><option value="file" selected="selected">file',
+				'<option value="uri">url</select>'].join("")).change(onSelectChange)).
+			append('<div class="importFrom">%0<input type="file" name="file" /></div>'.
+					format(me.step1FileText));
 	},
 
 	setOnLoad: function(place, wizard, iframe) {
@@ -135,7 +134,7 @@ config.macros.fileImport = {
 			if (++(completeReadyStateChanges) == 3) {
 				loadHandler();
 			}
-		}
+		};
 	},
 
 	importTiddlers: function(place, wizard, iframe) {
@@ -232,6 +231,6 @@ config.macros.importTiddlers.onGetTiddlerList = function(context, wizard) {
 		importTiddlers.step3Html = _step3Html;
 	}
 	_onGetTiddlerList.apply(this, arguments);
-}
+};
 })(jQuery);
 //}}}
