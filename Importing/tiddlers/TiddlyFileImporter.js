@@ -1,6 +1,6 @@
 /***
 |''Name''|TiddlyFileImporter|
-|''Version''|0.3.5|
+|''Version''|0.3.6|
 |''Author''|Ben Gillies|
 |''Type''|plugin|
 |''Description''|Upload a TiddlyWiki file to TiddlyWeb, and import the tiddlers.|
@@ -104,6 +104,7 @@ config.macros.fileImport = {
 		form.action = me.reflectorURI.format(
 			config.extensions.tiddlyspace.getCSRFToken());
 		form.enctype = 'multipart/form-data';
+		form.encoding = 'multipart/form-data';
 		form.method = 'POST';
 		form.target = iframeName;
 		onSelectChange = function(e) {
