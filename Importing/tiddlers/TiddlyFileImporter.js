@@ -132,7 +132,7 @@ config.macros.fileImport = {
 		iframe.onload = loadHandler;
 		completeReadyStateChanges = 0;
 		iframe.onreadystatechange = function() {
-			if (++(completeReadyStateChanges) == 3) {
+			if (++(completeReadyStateChanges) == 5) {
 				loadHandler();
 			}
 		};
