@@ -1,6 +1,6 @@
 /***
 |''Name''|TiddlyFileImporter|
-|''Version''|0.3.6|
+|''Version''|0.3.7|
 |''Author''|Ben Gillies|
 |''Type''|plugin|
 |''Description''|Upload a TiddlyWiki file to TiddlyWeb, and import the tiddlers.|
