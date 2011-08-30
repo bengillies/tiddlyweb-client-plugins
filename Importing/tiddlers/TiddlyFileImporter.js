@@ -1,6 +1,6 @@
 /***
 |''Name''|TiddlyFileImporter|
-|''Version''|0.3.7|
+|''Version''|0.3.8|
 |''Author''|Ben Gillies|
 |''Type''|plugin|
 |''Description''|Upload a TiddlyWiki file to TiddlyWeb, and import the tiddlers.|
@@ -189,9 +189,11 @@ config.macros.importTiddlers.onGetTiddler = function(context, wizard) {
 		fields['server.page.revision'] = 'false';
 		delete fields['server.recipe'];
 		fields.changecount = 1;
+		store.suspendNotifications();
 		store.saveTiddler(tiddler.title, tiddler.title, tiddler.text,
 			tiddler.modifier, tiddler.modified, tiddler.tags, tiddler.fields,
 			false, tiddler.created);
+		store.resumeNotifications();
 		var remainingImports = wizard.getValue("remainingImports")-1;
 		wizard.setValue("remainingImports",remainingImports);
 		if(remainingImports === 0) {
