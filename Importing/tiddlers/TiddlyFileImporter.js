@@ -112,7 +112,7 @@ config.macros.fileImport = {
 				$(".importFrom").html('%0 <input type="file" name="file" />'.
 					format(me.step1FileText));
 			} else {
-				$(".importFrom").html('%0 <input type="text" name="uri" />'
+				$(".importFrom").html('URL: <input type="text" name="uri" />'
 					+ ' Do you want <a target="_blank" href="http://faq.tiddlyspace.com/How%20do%20I%20include%2Fexclude%20spaces%3F">inclusion</a> instead?');
 			}
 		};
