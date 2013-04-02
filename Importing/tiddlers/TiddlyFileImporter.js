@@ -24,7 +24,6 @@ config.macros.fileImport = {
 	uploadLabel: 'Upload',
 	uploadLabelPrompt: 'Import tiddlers from this TiddlyWiki',
 	step1FileText: 'File:',
-	step1URLText: 'URL:',
 	step1PostText: 'In the next screen you will select the tiddlers to import.',
 	step1Title: 'Step 1: Pick a TiddlyWiki to import',
 	step1TypeChooser: 'Import From:',
@@ -113,8 +112,8 @@ config.macros.fileImport = {
 				$(".importFrom").html('%0 <input type="file" name="file" />'.
 					format(me.step1FileText));
 			} else {
-				$(".importFrom").html('%0 <input type="text" name="uri" />'.
-					format(me.step1URLText));
+				$(".importFrom").html('%0 <input type="text" name="uri" />'
+					+ ' Do you want <a target="_blank" href="http://faq.tiddlyspace.com/How%20do%20I%20include%2Fexclude%20spaces%3F">inclusion</a> instead?');
 			}
 		};
 		$(place).append('<span>%0</span>'.format(me.step1TypeChooser)).
